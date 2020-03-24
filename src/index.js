@@ -10,14 +10,6 @@ const loadMore = document.querySelector('#load-more');
 
 searchForm.addEventListener('input', debounce(searchFormInputHandler, 1800));
 loadMore.addEventListener('click', loadMoreBtnHandler);
-// loadMore.addEventListener('click', () => {
-//   setTimeout(() => {
-//     window.scrollTo({
-//       top: +window.scrollY + 1162,
-//       behavior: 'smooth',
-//     });
-//   }, 800);
-// });
 
 function searchFormInputHandler(e) {
   e.preventDefault();
