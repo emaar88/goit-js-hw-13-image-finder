@@ -95,3 +95,24 @@ img {
   background-color: aquamarine;
   color: black;
 }
+
+.to_up {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background-color: cadetblue;
+  padding: 30px;
+  border-radius: 50%;
+  transition: 1s all;
+}
+
+.to_up:hover {
+  cursor: pointer;
+  background-color: cyan;
+}
+.to_close {
+  opacity: 0;
+}
+.to_see {
+  opacity: 1;
+}

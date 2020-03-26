@@ -8,10 +8,12 @@ const searchForm = document.querySelector('#search-form');
 const galleryList = document.querySelector('#gallery-list');
 const loadMore = document.querySelector('#load-more');
 const findPhotos = document.querySelector('#findPhotosBtn');
+const to_up = document.querySelector('#to_up');
 
 findPhotos.addEventListener('click', searchFormInputHandler);
 loadMore.addEventListener('click', loadMoreBtnHandler);
 searchForm.addEventListener('keydown', pressEnter);
+to_up.addEventListener('click', toScrollToMyHeader);
 
 function searchFormInputHandler(e) {
   e.preventDefault();
@@ -53,6 +55,7 @@ function loadMoreBtnHandler() {
       top: +window.scrollY + 1162,
       behavior: 'smooth',
     });
+    to_up.classList.remove('to_close');
   }, 1000);
 }
 
@@ -82,4 +85,15 @@ function insertListPhotos(items) {
 
 function clearListItems() {
   galleryList.innerHTML = '';
+}
+
+function toScrollToMyHeader() {
+  console.log('Pivet');
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    to_up.classList.add('to_close');
+  }, 100);
 }
