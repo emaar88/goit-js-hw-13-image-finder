@@ -42,7 +42,6 @@ function pressEnter(e) {
     requestPhotos.resetPage();
     requestPhotos.searchQuery = inputKeyword.value;
     fetchPhotosForKeyword();
-    loadMore.classList.remove('is-hidden');
   }
 }
 
@@ -50,7 +49,7 @@ function loadMoreBtnHandler() {
   fetchPhotosForKeyword();
   setTimeout(() => {
     window.scrollTo({
-      top: window.scrollY + 1162,
+      top: +window.scrollY + 1162,
       behavior: 'smooth',
     });
   }, 500);
@@ -67,8 +66,6 @@ function fetchPhotosForKeyword() {
 
 function insertListPhotos(items) {
   const markup = pixabayPhotos(items);
-  galleryList.insertAdjacentHTML('beforeend', markup);
-  loadMore.classList.remove('is-hidden');
   if (markup === '') {
     loadMore.classList.add('is-hidden');
     PNotify.info({
@@ -78,6 +75,8 @@ function insertListPhotos(items) {
     });
     return;
   }
+  galleryList.insertAdjacentHTML('beforeend', markup);
+  loadMore.classList.remove('is-hidden');
 }
 
 function clearListItems() {
