@@ -50,7 +50,7 @@ function loadMoreBtnHandler() {
   fetchPhotosForKeyword();
   setTimeout(() => {
     window.scrollTo({
-      top: window.scrollY + 1162,
+      top: window.scrollY + window.scrollY,
       behavior: 'smooth',
     });
   }, 500);
