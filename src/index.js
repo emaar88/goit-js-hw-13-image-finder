@@ -53,7 +53,7 @@ function loadMoreBtnHandler() {
       top: +window.scrollY + 1162,
       behavior: 'smooth',
     });
-  }, 500);
+  }, 1000);
 }
 
 function fetchPhotosForKeyword() {
