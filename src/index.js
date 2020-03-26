@@ -14,11 +14,23 @@ loadMore.addEventListener('click', loadMoreBtnHandler);
 searchForm.addEventListener('keydown', pressEnter);
 
 function searchFormInputHandler(e) {
-  console.log('Ura');
   e.preventDefault();
-  const inputKeyword = document.querySelector('#our_keyword');
   clearListItems();
   requestPhotos.resetPage();
+  toLoadPhotos();
+}
+
+function pressEnter(e) {
+  if (e.keyCode == 13) {
+    e.preventDefault();
+    clearListItems();
+    requestPhotos.resetPage();
+    toLoadPhotos();
+  }
+}
+
+function toLoadPhotos() {
+  const inputKeyword = document.querySelector('#our_keyword');
   if (inputKeyword.value === '') {
     loadMore.classList.add('is-hidden');
     PNotify.info({
@@ -29,17 +41,6 @@ function searchFormInputHandler(e) {
     return;
   }
   if (inputKeyword.value !== '') {
-    requestPhotos.searchQuery = inputKeyword.value;
-    fetchPhotosForKeyword();
-  }
-}
-
-function pressEnter(e) {
-  const inputKeyword = document.querySelector('#our_keyword');
-  if (e.keyCode == 13) {
-    e.preventDefault();
-    clearListItems();
-    requestPhotos.resetPage();
     requestPhotos.searchQuery = inputKeyword.value;
     fetchPhotosForKeyword();
   }
