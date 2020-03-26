@@ -47,8 +47,8 @@ img {
 }
 
 .photo-card {
-  max-width: 50%;
-  width: 320px;
+  min-width: 319px;
+  max-width: 320px;
 }
 .gallery {
   display: flex;
