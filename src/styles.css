@@ -20,6 +20,10 @@ body {
 img {
   max-width: 100%;
 }
+.photo-card img {
+  min-height: 213px;
+  max-height: 215px;
+}
 .search-form {
   display: flex;
   justify-content: center;

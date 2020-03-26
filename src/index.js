@@ -31,7 +31,6 @@ function searchFormInputHandler(e) {
   if (inputKeyword.value !== '') {
     requestPhotos.searchQuery = inputKeyword.value;
     fetchPhotosForKeyword();
-    return;
   }
 }
 
@@ -43,9 +42,7 @@ function pressEnter(e) {
     requestPhotos.resetPage();
     requestPhotos.searchQuery = inputKeyword.value;
     fetchPhotosForKeyword();
-    setTimeout(() => {
-      loadMore.classList.remove('is-hidden');
-    }, 800);
+    loadMore.classList.remove('is-hidden');
   }
 }
 
@@ -53,10 +50,10 @@ function loadMoreBtnHandler() {
   fetchPhotosForKeyword();
   setTimeout(() => {
     window.scrollTo({
-      top: +window.scrollY + pageYOffset,
+      top: window.scrollY + 1162,
       behavior: 'smooth',
     });
-  }, 800);
+  }, 500);
 }
 
 function fetchPhotosForKeyword() {
