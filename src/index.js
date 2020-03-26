@@ -7,24 +7,32 @@ import PNotify from '../node_modules/pnotify/dist/es/PNotify.js';
 const searchForm = document.querySelector('#search-form');
 const galleryList = document.querySelector('#gallery-list');
 const loadMore = document.querySelector('#load-more');
+const findPhotos = document.querySelector('#findPhotosBtn');
 
-searchForm.addEventListener('input', debounce(searchFormInputHandler, 1800));
+findPhotos.addEventListener('click', searchFormInputHandler);
 loadMore.addEventListener('click', loadMoreBtnHandler);
 searchForm.addEventListener('keydown', pressEnter);
 
 function searchFormInputHandler(e) {
+  console.log('Ura');
   e.preventDefault();
   const inputKeyword = document.querySelector('#our_keyword');
   clearListItems();
   requestPhotos.resetPage();
   if (inputKeyword.value === '') {
     loadMore.classList.add('is-hidden');
+    PNotify.info({
+      text: 'Вы не ввели ключевое слово',
+      delay: 3000,
+      icon: true,
+    });
     return;
   }
-
-  loadMore.classList.remove('is-hidden');
-  requestPhotos.searchQuery = inputKeyword.value;
-  fetchPhotosForKeyword();
+  if (inputKeyword.value !== '') {
+    requestPhotos.searchQuery = inputKeyword.value;
+    fetchPhotosForKeyword();
+    return;
+  }
 }
 
 function pressEnter(e) {
@@ -33,9 +41,11 @@ function pressEnter(e) {
     e.preventDefault();
     clearListItems();
     requestPhotos.resetPage();
-    loadMore.classList.remove('is-hidden');
     requestPhotos.searchQuery = inputKeyword.value;
     fetchPhotosForKeyword();
+    setTimeout(() => {
+      loadMore.classList.remove('is-hidden');
+    }, 800);
   }
 }
 
@@ -43,7 +53,7 @@ function loadMoreBtnHandler() {
   fetchPhotosForKeyword();
   setTimeout(() => {
     window.scrollTo({
-      top: +window.scrollY + 1162,
+      top: +window.scrollY + pageYOffset,
       behavior: 'smooth',
     });
   }, 800);
@@ -61,13 +71,15 @@ function fetchPhotosForKeyword() {
 function insertListPhotos(items) {
   const markup = pixabayPhotos(items);
   galleryList.insertAdjacentHTML('beforeend', markup);
+  loadMore.classList.remove('is-hidden');
   if (markup === '') {
     loadMore.classList.add('is-hidden');
     PNotify.info({
-      text: 'Совпадений не найдено. Введите правильный запрос',
+      text: 'Совпадений не найдено. Попробуйте ввести другое ключевое слово',
       delay: 3000,
       icon: true,
     });
+    return;
   }
 }
 
